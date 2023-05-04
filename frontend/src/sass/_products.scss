@@ -1,0 +1,223 @@
+.qoutes {
+  margin: 3rem auto;
+  width: 90%;
+  text-align: center;
+
+  @media (max-width: 650px) {
+    margin: 0.5rem auto;
+  }
+}
+
+.products {
+  // position: relative;
+  width: 90%;
+  display: flex;
+  gap: 3rem;
+  margin: 7rem auto;
+
+  h3 {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 4rem;
+  }
+
+  &__heading {
+    font-size: 5rem;
+    font-weight: 400;
+  }
+
+  @media (min-width: 1920px) {
+    gap: 4rem;
+  }
+
+  @media (max-width: 650px) {
+    width: 90%;
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 810px) {
+    margin-top: 2.25rem;
+    flex-direction: column;
+  }
+
+  @media (max-width: 450px) {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  @media (max-width: 373px) {
+    width: 95%;
+  }
+
+  &__filter {
+    flex: 0 0 30%;
+
+    min-height: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    h2 {
+      font-size: 4rem;
+      font-weight: 400;
+      pointer-events: none;
+    }
+
+    h2.filterHead {
+      @media (max-width: 810px) {
+        font-size: 3.2rem;
+        border: 2px solid $crl-charcoal-grey;
+        padding: 1.5rem 0;
+        text-align: center;
+        cursor: pointer;
+        pointer-events: all;
+
+        &:hover {
+          background: $crl-charcoal-grey;
+          color: $crl-off-white;
+        }
+      }
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      h2 {
+        font-size: 2.4rem;
+      }
+
+      &__option {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        cursor: pointer;
+
+        input {
+          width: 2rem;
+          aspect-ratio: 1 / 1;
+          cursor: pointer;
+        }
+
+        label {
+          cursor: pointer;
+          font-size: 1.7rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  &__products {
+    flex: 1;
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    gap: 1.5rem;
+
+    @media (max-width: 650px) {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  &__products.onePrd {
+    li {
+      width: 30rem;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    h2 {
+      font-weight: 400;
+      font-size: 2.2rem;
+      text-align: center;
+      text-transform: capitalize;
+
+      @media (max-width: 650px) {
+        font-size: 1.8rem;
+      }
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 2rem;
+
+      @media (max-width: 650px) {
+        font-size: 1.8rem;
+      }
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: center;
+      text-transform: capitalize;
+
+      .stars {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  &__product {
+    position: relative;
+    width: 100%;
+    border: 1px solid #ddd;
+    background: $crl-white;
+    padding: 1rem;
+    display: flex;
+    gap: 2.5rem;
+    flex-direction: column;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    button {
+      margin-top: auto;
+      cursor: pointer;
+      background: $crl-charcoal-grey;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 1.6rem;
+      padding: 1.5rem;
+      width: 100%;
+      border: none;
+      font-family: inherit;
+      color: $crl-white;
+
+      &:hover {
+        background: lighten($crl-charcoal-grey, 5);
+      }
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $crl-charcoal-grey;
+  z-index: -1;
+}

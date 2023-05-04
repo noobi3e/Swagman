@@ -1,0 +1,90 @@
+.userProfile {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0 3rem;
+
+  .content {
+    padding: 4rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    svg {
+      font-size: 15rem;
+      fill: $crl-charcoal-grey;
+    }
+
+    h2 {
+      font-size: 4rem;
+      font-weight: 500;
+      text-transform: capitalize;
+      text-align: center;
+
+      @media (max-width: 480px) {
+        font-size: 3.2rem;
+      }
+
+      @media (max-width: 410px) {
+        font-size: 2.4rem;
+      }
+    }
+
+    .confirmtext {
+      font-size: 3.2rem;
+      margin-top: 4rem;
+      text-align: center;
+
+      @media (max-width: 373px) {
+        font-size: 2.4rem;
+      }
+    }
+
+    .btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      // @media (max-width: 480px) {
+      //     font-size: 1.5rem;
+      //     padding: 1.25rem 2.75rem;
+      //   }
+
+      button {
+        cursor: pointer;
+        background: $crl-charcoal-grey;
+        border-radius: 0.75rem;
+        padding: 1.5rem 3rem;
+        font-size: 1.7rem;
+        border: none;
+        color: $crl-off-white;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-family: inherit;
+
+        &:hover {
+          background: lighten($crl-charcoal-grey, 10);
+        }
+
+        @media (max-width: 480px) {
+          font-size: 1.5rem;
+          padding: 1.25rem 2.75rem;
+        }
+      }
+
+      button.confirm {
+        background: #dd095a;
+
+        &:hover {
+          background: darken(#dd095a, 10);
+        }
+      }
+    }
+  }
+}
