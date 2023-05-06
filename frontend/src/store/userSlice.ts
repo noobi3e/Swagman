@@ -28,6 +28,7 @@ interface UserState {
   isLoggedIn: boolean
   err: errObj
   userDetails: UserInfo | null
+  curUserId: string
 }
 
 const init: UserState = {
@@ -38,6 +39,7 @@ const init: UserState = {
     isErr: false,
   },
   userDetails: null,
+  curUserId: '',
 }
 
 export const userSlice = createSlice({
@@ -52,6 +54,7 @@ export const userSlice = createSlice({
     },
     storeUser(state, action: PayloadAction<{ user: UserInfo; token: string }>) {
       state.userDetails = action.payload.user
+      state.curUserId = action.payload.user.id
 
       localStorage.clear()
       localStorage.setItem('usertoken', JSON.stringify(action.payload.token))

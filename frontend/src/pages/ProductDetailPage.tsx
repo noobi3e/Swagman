@@ -133,7 +133,7 @@ export const ProductDetailsPage: React.FC = () => {
             <div className='review-filter'></div>
             <div className='review-container'>
               <NewReview />
-              <Reviews reviews={details.reviews} />
+              <Reviews reviews={details.reviews} prdId={details._id} />
             </div>
           </section>
         </section>

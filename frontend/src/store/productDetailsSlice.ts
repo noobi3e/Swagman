@@ -108,7 +108,7 @@ export const addNewReview =
       dispatch(prdDetailAction.setAddingReview(true))
       dispatch(prdDetailAction.setReviewErr(false))
       const token =
-        'bearer ' + JSON.parse(localStorage.getItem('usertoken') as string) // as i know if code make it here means user is logged in and has a auth token in localstorage
+        'bearer ' + JSON.parse(localStorage.getItem('usertoken') as string) // as i know if code make it here means user is logged in and has an auth token in localstorage
       const res = await fetch(
         `${import.meta.env.VITE_URL}/products/review/${id}`,
         {
@@ -140,5 +140,39 @@ export const addNewReview =
       setTimeout(() => {
         dispatch(prdDetailAction.setReviewErr(false))
       }, 1000)
+    }
+  }
+
+export const updateUserReview =
+  (userReview: { review: string }, id: string) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch(prdDetailAction.setReviewErr(false))
+      const token =
+        'bearer ' + JSON.parse(localStorage.getItem('usertoken') as string) // as i know if code make it here means user is logged in and has an auth token in localstorage
+      const res = await fetch(
+        `${import.meta.env.VITE_URL}/products/review/${id}`,
+        {
+          method: 'PATCH',
+          body: JSON.stringify(userReview),
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: import.meta.env.VITE_API_KEY,
+            authorization: token,
+          },
+        }
+      )
+
+      if (!res.ok) {
+        const err = JSON.parse(await res.text())
+
+        throw new Error(err.message)
+      }
+
+      const { data } = await res.json()
+
+      dispatch(prdDetailAction.updateReviews(data.reviews))
+    } catch (err: any) {
+      dispatch(prdDetailAction.setReviewErr(false))
     }
   }
