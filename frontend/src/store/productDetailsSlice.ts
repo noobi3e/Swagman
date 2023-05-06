@@ -26,7 +26,7 @@ export interface PrdDetails {
 }
 
 interface prdInit {
-  prdDetails: PrdDetails | object
+  prdDetails: PrdDetails | null
   isLoading: boolean
   err: errObj
   addingReview: boolean
@@ -34,7 +34,7 @@ interface prdInit {
 }
 
 const init: prdInit = {
-  prdDetails: {},
+  prdDetails: null,
   isLoading: true,
   err: { isErr: false, errTxt: '' },
   addingReview: false,
@@ -96,6 +96,7 @@ export const fetchProductDetails =
       dispatch(prdDetailAction.storeDetails(product))
     } catch (err: any) {
       const message = err.message && 'something went wrong'
+      dispatch(prdDetailAction.setLoading(false))
       dispatch(prdDetailAction.setError({ isErr: true, errTxt: message }))
     }
   }

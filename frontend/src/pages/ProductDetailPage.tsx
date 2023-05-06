@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { displayStars, windowWidth } from '../utils/utility'
 import { cusDispatch, cusSelector } from '../store/cusHooks'
@@ -9,12 +9,14 @@ import { Reviews } from '../components/Reviews'
 import { NewReview } from '../components/NewReview'
 import { Loader } from '../components/Loaders/Loader'
 import { cartAction } from '../store/cartSlice'
+import { ErrorPage } from './ErrorPage'
 
 export const ProductDetailsPage: React.FC = () => {
   const params = useParams()
   const dispatch = cusDispatch()
-  const isLoading = cusSelector((st) => st.prdDetail.isLoading)
+  const { isLoading, err } = cusSelector((st) => st.prdDetail)
   const details = cusSelector((st) => st.prdDetail.prdDetails as PrdDetails)
+  const [curImg, setCurImg] = useState('')
 
   useEffect(() => {
     // scrolling page to top
@@ -24,38 +26,51 @@ export const ProductDetailsPage: React.FC = () => {
     console.log()
   }, [dispatch, params.id])
 
-  const stars = details.rating ? displayStars(details.rating) : displayStars(0)
+  // loading img
+  useEffect(() => {
+    details && setCurImg(`${import.meta.env.VITE_IMG_URL}${details.coverImg}`)
+  }, [details])
+
+  const stars =
+    details && details.rating ? displayStars(details.rating) : displayStars(0)
 
   const smallImgs =
+    details &&
     details.images &&
     details.images.map((el, i) => (
-      <img
+      <div
+        className='smallImgBox'
         key={el + i}
-        src={import.meta.env.VITE_IMG_URL + el}
-        alt={details.name}
-      />
+        data-img={import.meta.env.VITE_IMG_URL + el}>
+        <img
+          src={import.meta.env.VITE_IMG_URL + el}
+          onClick={(e) => {
+            setCurImg((e.target as HTMLImageElement).src)
+          }}
+          alt={details.name}
+        />
+      </div>
     ))
 
   const splitedDetails =
+    details &&
     details.details &&
     details.details.split('%').map((el, i) => <span key={i + el}>{el}</span>)
 
   const ingrds =
+    details &&
     details.ingredients &&
     details.ingredients.map((el, i) => <Ingredients key={el + i} ing={el} />)
 
   return (
     <>
-      {isLoading && <Loader />}
-      {!isLoading && (
+      {!isLoading && err.isErr && <ErrorPage />}
+      {isLoading && !err.isErr && <Loader />}
+      {!isLoading && !err.isErr && (
         <section className='product'>
           <section className='product__info'>
             <figure className='product__img img'>
-              <img
-                src={`${import.meta.env.VITE_IMG_URL}${details.coverImg}`}
-                alt=''
-                className='img__main'
-              />
+              <img src={curImg} alt={details.name} className='img__main' />
               <div className='img__small'>{smallImgs}</div>
             </figure>
 
