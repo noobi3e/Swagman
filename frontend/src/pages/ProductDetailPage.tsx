@@ -10,7 +10,6 @@ import { NewReview } from '../components/NewReview'
 import { Loader } from '../components/Loaders/Loader'
 import { cartAction } from '../store/cartSlice'
 import { ErrorPage } from './ErrorPage'
-import ReactDOM from 'react-dom'
 import { Modal } from '../components/Modal'
 import { AnimatePresence } from 'framer-motion'
 
