@@ -115,7 +115,6 @@ export const verifyUser = async (req, res, next) => {
 // verifying user has authentic key or not
 export const verifyKey = async (req, res, next) => {
   try {
-    console.log(' iam here')
     const key = req.headers.apikey
 
     const isAuth = await bcrypt

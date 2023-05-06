@@ -26,8 +26,6 @@ export const ProductDetailsPage: React.FC = () => {
     // scrolling page to top
     window.scrollTo(0, 0)
     dispatch(fetchProductDetails(params.id as string))
-
-    console.log()
   }, [dispatch, params.id])
 
   // loading img
@@ -102,7 +100,6 @@ export const ProductDetailsPage: React.FC = () => {
                 <button
                   className='btn btn--addToCart'
                   onClick={() => {
-                    console.log('i am here')
                     dispatch(
                       cartAction.addToCart({
                         id: details._id,

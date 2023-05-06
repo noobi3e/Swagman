@@ -43,7 +43,6 @@ export const fetchCategories = () => async (dispatch: AppDispatch) => {
     if (!res.ok) {
       const err = JSON.parse(await res.text())
 
-      console.log(err)
       throw new Error(err.message)
     }
 

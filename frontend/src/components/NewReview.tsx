@@ -50,7 +50,6 @@ export const NewReview: React.FC = () => {
       review: userReview,
       rating: userRating,
     }
-    console.log(review)
     // sending user review to server
     dispatch(addNewReview(review, prdId as string))
 

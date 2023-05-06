@@ -41,7 +41,6 @@ app.use('/api/v1/users', userRoutes)
 
 // handling unhandled route
 app.use((req, res, next) => {
-  console.log('i am here')
   next(
     new CusError(
       `API doesn't have any information for ${

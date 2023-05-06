@@ -70,7 +70,6 @@ export const App: React.FC = () => {
   const { limitLoading, err: prdErr } = cusSelector((st) => st.prds)
 
   useEffect(() => {
-    console.log('i am here')
     const token = JSON.parse(localStorage.getItem('usertoken') as string)
 
     token && dispatch(verifyUser(token))
