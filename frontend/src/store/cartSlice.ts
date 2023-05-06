@@ -29,7 +29,6 @@ export const cartSlice = createSlice({
       action: PayloadAction<{
         id: string
         price: number
-        userIsLoggedIn: boolean
       }>
     ) {
       const id = action.payload.id

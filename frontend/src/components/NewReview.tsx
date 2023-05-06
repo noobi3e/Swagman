@@ -70,7 +70,7 @@ export const NewReview: React.FC = () => {
   const starsForGettingUserRating = displayStars(userRating, setRating)
 
   // overall rating
-  const stars = rating && displayStars(rating)
+  const stars = rating ? displayStars(rating) : displayStars(0)
   return (
     <>
       <section className='overall'>

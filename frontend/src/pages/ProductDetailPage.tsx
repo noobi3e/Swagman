@@ -15,7 +15,6 @@ export const ProductDetailsPage: React.FC = () => {
   const dispatch = cusDispatch()
   const isLoading = cusSelector((st) => st.prdDetail.isLoading)
   const details = cusSelector((st) => st.prdDetail.prdDetails as PrdDetails)
-  const isLoggedIn = cusSelector((st) => st.user.isLoggedIn)
 
   useEffect(() => {
     // scrolling page to top
@@ -25,7 +24,7 @@ export const ProductDetailsPage: React.FC = () => {
     console.log()
   }, [dispatch, params.id])
 
-  const stars = details.rating && displayStars(details.rating)
+  const stars = details.rating ? displayStars(details.rating) : displayStars(0)
 
   const smallImgs =
     details.images &&
@@ -77,7 +76,6 @@ export const ProductDetailsPage: React.FC = () => {
                       cartAction.addToCart({
                         id: details._id,
                         price: details.price,
-                        userIsLoggedIn: isLoggedIn,
                       })
                     )
                   }}>

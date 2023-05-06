@@ -1,7 +1,7 @@
 import React from 'react'
 import { cusDispatch, cusSelector } from '../store/cusHooks'
 import { Link } from 'react-router-dom'
-import { Trash3Fill, X } from 'react-bootstrap-icons'
+import { Trash3Fill } from 'react-bootstrap-icons'
 import { cartAction } from '../store/cartSlice'
 
 export const CartItem: React.FC<{ id: string; quantity: number }> = ({
