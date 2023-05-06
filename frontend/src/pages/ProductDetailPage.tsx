@@ -10,6 +10,9 @@ import { NewReview } from '../components/NewReview'
 import { Loader } from '../components/Loaders/Loader'
 import { cartAction } from '../store/cartSlice'
 import { ErrorPage } from './ErrorPage'
+import ReactDOM from 'react-dom'
+import { Modal } from '../components/Modal'
+import { AnimatePresence } from 'framer-motion'
 
 export const ProductDetailsPage: React.FC = () => {
   const params = useParams()
@@ -17,6 +20,7 @@ export const ProductDetailsPage: React.FC = () => {
   const { isLoading, err } = cusSelector((st) => st.prdDetail)
   const details = cusSelector((st) => st.prdDetail.prdDetails as PrdDetails)
   const [curImg, setCurImg] = useState('')
+  const [showImgModal, setShowImgModal] = useState(false)
 
   useEffect(() => {
     // scrolling page to top
@@ -62,15 +66,27 @@ export const ProductDetailsPage: React.FC = () => {
     details.ingredients &&
     details.ingredients.map((el, i) => <Ingredients key={el + i} ing={el} />)
 
+  const hideModal = () => setShowImgModal(false)
+
   return (
     <>
+      <AnimatePresence mode='wait'>
+        {showImgModal && (
+          <Modal hideModal={hideModal} alt={details.name} img={curImg} />
+        )}
+      </AnimatePresence>
       {!isLoading && err.isErr && <ErrorPage />}
       {isLoading && !err.isErr && <Loader />}
       {!isLoading && !err.isErr && (
         <section className='product'>
           <section className='product__info'>
             <figure className='product__img img'>
-              <img src={curImg} alt={details.name} className='img__main' />
+              <img
+                src={curImg}
+                alt={details.name}
+                className='img__main'
+                onClick={() => setShowImgModal(true)}
+              />
               <div className='img__small'>{smallImgs}</div>
             </figure>
 
