@@ -16,6 +16,7 @@ import { fetchPrdHealines } from './store/productsSlice'
 import { fetchCategories } from './store/categoriesSlice'
 import { Loader } from './components/Loaders/Loader'
 import { CartPage } from './pages/CartPage'
+import { getCartData } from './store/cartSlice'
 
 const router = createBrowserRouter([
   {
@@ -69,10 +70,11 @@ export const App: React.FC = () => {
   const { limitLoading, err: prdErr } = cusSelector((st) => st.prds)
 
   useEffect(() => {
+    console.log('i am here')
     const token = JSON.parse(localStorage.getItem('usertoken') as string)
 
     token && dispatch(verifyUser(token))
-
+    token && dispatch(getCartData(token))
     dispatch(fetchPrdHealines())
     dispatch(fetchCategories())
   }, [dispatch])

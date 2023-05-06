@@ -15,6 +15,7 @@ export const ProductDetailsPage: React.FC = () => {
   const dispatch = cusDispatch()
   const isLoading = cusSelector((st) => st.prdDetail.isLoading)
   const details = cusSelector((st) => st.prdDetail.prdDetails as PrdDetails)
+  const isLoggedIn = cusSelector((st) => st.user.isLoggedIn)
 
   useEffect(() => {
     // scrolling page to top
@@ -71,7 +72,14 @@ export const ProductDetailsPage: React.FC = () => {
                 <button
                   className='btn btn--addToCart'
                   onClick={() => {
-                    dispatch(cartAction.addToCart(details._id))
+                    console.log('i am here')
+                    dispatch(
+                      cartAction.addToCart({
+                        id: details._id,
+                        price: details.price,
+                        userIsLoggedIn: isLoggedIn,
+                      })
+                    )
                   }}>
                   add to cart
                 </button>

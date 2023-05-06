@@ -3,6 +3,7 @@ import { cusDispatch, cusSelector } from '../store/cusHooks'
 import { userAction } from '../store/userSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, PersonCircle } from 'react-bootstrap-icons'
+import { cartAction } from '../store/cartSlice'
 
 export const UserProfilePage: React.FC = () => {
   const dispatch = cusDispatch()
@@ -42,6 +43,7 @@ export const UserProfilePage: React.FC = () => {
                     dispatch(userAction.logOut())
                     setWantUserConfirmation(false)
                     navigate('/user/login')
+                    dispatch(cartAction.loadCart({ cart: [], totalPrice: 0 }))
                   }}>
                   confirm
                 </button>

@@ -9,6 +9,9 @@ router.post('/signup', AuthController.userSignUp)
 // logging user in
 router.post('/login', AuthController.userLogIn)
 
+// sending cart
+router.get('/cart', AuthController.verifyUser, AuthController.getCart)
+
 // VERIFY USER
 router.post(
   '/authenticate',

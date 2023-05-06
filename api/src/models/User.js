@@ -23,7 +23,7 @@ const userSchema = new Schema({
     unique: true,
     validate: [validate.isEmail, 'Please enter a valid email'],
   },
-  cart: [Object],
+  cart: Object,
   password: {
     type: String,
     trim: true,

@@ -108,7 +108,6 @@ export const addNewReview =
       dispatch(prdDetailAction.setReviewErr(false))
       const token =
         'bearer ' + JSON.parse(localStorage.getItem('usertoken') as string) // as i know if code make it here means user is logged in and has a auth token in localstorage
-      console.log(token)
       const res = await fetch(
         `${import.meta.env.VITE_URL}/products/review/${id}`,
         {

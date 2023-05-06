@@ -154,6 +154,35 @@ export const sendAuthUser = async (req, res, next) => {
 
 export const addToCart = async (req, res, next) => {
   try {
+    const userID = req.user._id
+
+    await UserModel.findByIdAndUpdate(
+      userID,
+      { $set: { cart: req.body } },
+      { new: true }
+    )
+
+    res.status(201).json({
+      status: 'Success✅',
+      statusCode: 200,
+      message: 'Cart modified successfully',
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const getCart = async (req, res, next) => {
+  try {
+    const cart = req.user.cart
+
+    res.status(200).json({
+      status: 'Success✅',
+      statusCode: 200,
+      data: {
+        cart,
+      },
+    })
   } catch (err) {
     next(err)
   }

@@ -2,6 +2,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { AppDispatch } from '.'
 import { errObj } from './cusHooks'
+import { getCartData } from './cartSlice'
 
 export interface NewUserData {
   fname: string
@@ -136,6 +137,7 @@ export const logUserIn =
         userAction.storeUser({ user: userData, token: credientials.authToken })
       )
       dispatch(userAction.setLoggin(true))
+      dispatch(getCartData(credientials.authToken))
     } catch (err: any) {
       dispatch(userAction.setErr({ isErr: true, errTxt: err.message }))
     }

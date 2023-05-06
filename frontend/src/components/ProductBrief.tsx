@@ -63,7 +63,9 @@ export const ProductBrief: React.FC<Products> = (props) => {
         </section>
         <button
           onClick={() => {
-            dispatch(cartAction.addToCart(props._id))
+            dispatch(
+              cartAction.addToCart({ id: props._id, price: props.price })
+            )
             setShowOverlay(false)
 
             setTimeout(() => setShowOverlay(true), 1000)

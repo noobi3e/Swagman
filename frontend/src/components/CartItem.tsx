@@ -1,7 +1,7 @@
 import React from 'react'
 import { cusDispatch, cusSelector } from '../store/cusHooks'
 import { Link } from 'react-router-dom'
-import { Trash3Fill } from 'react-bootstrap-icons'
+import { Trash3Fill, X } from 'react-bootstrap-icons'
 import { cartAction } from '../store/cartSlice'
 
 export const CartItem: React.FC<{ id: string; quantity: number }> = ({
@@ -31,7 +31,12 @@ export const CartItem: React.FC<{ id: string; quantity: number }> = ({
           <p className='quantity'>({quantity})</p>
           <Trash3Fill
             onClick={() =>
-              dispatch(cartAction.removeFromCart(data?._id as string))
+              dispatch(
+                cartAction.removeFromCart({
+                  id: data?._id as string,
+                  price: data?.price as number,
+                })
+              )
             }
           />
         </div>

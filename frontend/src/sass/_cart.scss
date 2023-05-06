@@ -43,6 +43,7 @@
     border: 2px solid #eee;
     padding: 0 4rem;
     display: flex;
+    border-radius: 0.7rem;
     flex-direction: column;
     height: max-content;
     gap: 2rem;
@@ -70,8 +71,41 @@
     }
 
     h6 {
+      position: relative;
       font-size: 1.6rem;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        position: relative;
+        display: inline-block;
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+
+      svg:hover + span {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 1.6;
+        display: inline-block;
+        top: 120%;
+        width: max-content;
+        right: -100%;
+        position: absolute;
+        padding: 0.5rem 1rem;
+        border: 1px solid $crl-charcoal-grey;
+        background: $crl-off-white;
+        color: $crl-black;
+        transition: all 0.3s ease-out;
+        opacity: 0;
+        visibility: hidden;
+      }
     }
 
     &:last-child {
@@ -87,12 +121,24 @@
 
   &__data {
     width: 60%;
-    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.07);
-    border-radius: 1rem;
+    // box-shadow: 0 0 2rem rgba(0, 0, 0, 0.07);
+    border: 2px solid #eee;
+    border-radius: 0.7rem;
     display: flex;
     flex-direction: column;
     height: max-content;
     gap: 3rem;
+
+    h4 {
+      padding-left: 3rem;
+      font-size: 4.4rem;
+      font-weight: 400;
+      padding-top: 3rem;
+      color: $crl-charcoal-grey;
+      position: relative;
+      display: inline-block;
+      align-self: flex-start;
+    }
 
     @media (max-width: 810px) {
       width: 100%;
