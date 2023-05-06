@@ -45,7 +45,7 @@ export const CartPage: React.FC = () => {
             {cart.length > 0 && <h4>Products</h4>}
             <ul className='cart__list'>{cartItems}</ul>
           </div>
-          <div className='cart__price'>
+          <section className='cart__price'>
             <h4>Cart Total</h4>
             <div className='cart__box'>
               <h6>Product Total</h6>
@@ -54,7 +54,7 @@ export const CartPage: React.FC = () => {
             <div className='cart__box'>
               <h6>
                 Deliviery charges <Info />
-                <span>delivery charge is ₹50 for order below 999</span>
+                <span>delivery charge is ₹50 for order below ₹999</span>
               </h6>
               <p>₹ {deliveryCharge}</p>
             </div>
@@ -63,7 +63,9 @@ export const CartPage: React.FC = () => {
               <h6>Total Price</h6>
               <p>₹ {cartTotal}</p>
             </div>
-          </div>
+
+            {cartTotal > 0 && <button className='checkout'>Checkout</button>}
+          </section>
         </div>
       </section>
     </>

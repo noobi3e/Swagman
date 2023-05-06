@@ -12,6 +12,7 @@ document.title = 'Swagman | Swag on point with swagman'
 export const HomePage: React.FC = () => {
   const dispatch = cusDispatch()
   const [beardPrd, setBeardPrd] = useState<Products | null>(null)
+  const [clothingPrds, setClothingPrds] = useState<Products[] | null>(null)
   const { products, isLoading } = cusSelector((st) => st.prds)
 
   useEffect(() => {
@@ -41,12 +42,43 @@ export const HomePage: React.FC = () => {
       }
     }
 
+    // fetching clothing
+    const fetchClothing = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_URL}/products?category=clothing`,
+          {
+            headers: { apikey: import.meta.env.VITE_API_KEY },
+          }
+        )
+
+        if (!res.ok) {
+          const err = JSON.parse(await res.text())
+
+          throw new Error(err.message)
+        }
+
+        const { data } = await res.json()
+
+        setClothingPrds(data.products)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchClothing()
     fetchBeard()
   }, [dispatch])
 
   const prds =
     products.length > 0 ? (
       products.slice(0, 8).map((el) => <ProductBrief key={el._id} {...el} />)
+    ) : (
+      <h3>No Products Found!!</h3>
+    )
+
+  const clothingJSX =
+    clothingPrds && clothingPrds.length > 0 ? (
+      clothingPrds.map((el) => <ProductBrief key={el._id} {...el} />)
     ) : (
       <h3>No Products Found!!</h3>
     )
@@ -74,7 +106,9 @@ export const HomePage: React.FC = () => {
         <img src={Banner1} alt='swagman offer 1' />
 
         <div className='content'>
-          <h2>Cloting range coming soon...</h2>
+          <h2>Swagman's Clothing Range</h2>
+          {!clothingPrds && <Loader />}
+          {clothingPrds && <ul className='home-products'>{clothingJSX}</ul>}
         </div>
       </section>
     </>
