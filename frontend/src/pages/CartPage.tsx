@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { ArrowLeft, Info } from 'react-bootstrap-icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { cusDispatch, cusSelector } from '../store/cusHooks'
 import { CartItem } from '../components/CartItem'
 import { sendCartToBackend } from '../store/cartSlice'
 
 export const CartPage: React.FC = () => {
   document.title = 'Swgman | Bag'
+  const navigate = useNavigate()
   const cart = cusSelector((st) => st.cart.cart)
   const totalPrice = cusSelector((st) => st.cart.totalPrice)
   const dispatch = cusDispatch()
@@ -31,6 +32,14 @@ export const CartPage: React.FC = () => {
   const deliveryCharge = totalPrice < 999 && totalPrice > 0 ? 50 : 0
 
   const cartTotal = totalPrice + deliveryCharge
+
+  const checkOutHandler = () => {
+    if (isLoggedIn) {
+      // TO BE IMPLEMENTED
+      return
+    }
+    navigate('/user/login')
+  }
 
   return (
     <>
@@ -64,7 +73,11 @@ export const CartPage: React.FC = () => {
               <p>₹ {cartTotal}</p>
             </div>
 
-            {cartTotal > 0 && <button className='checkout'>Checkout</button>}
+            {cartTotal > 0 && (
+              <button className='checkout' onClick={checkOutHandler}>
+                Checkout
+              </button>
+            )}
           </section>
         </div>
       </section>
