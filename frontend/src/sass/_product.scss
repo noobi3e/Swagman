@@ -486,7 +486,6 @@
     }
 
     .editMode {
-      opacity: 0;
       position: absolute;
       top: 1.5rem;
       right: 2rem;
@@ -498,10 +497,6 @@
       &:hover {
         scale: 1.1;
       }
-    }
-
-    &:hover > svg.editMode {
-      opacity: 1;
     }
 
     &__review-box {

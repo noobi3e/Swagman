@@ -31,6 +31,7 @@ export const SearchBar: React.FC = () => {
   const navigate = useNavigate()
   const { cart } = cusSelector((st) => st.cart)
 
+  // handler when user click on profile icon
   const userHandler = () => {
     if (!isLoggedIn) return navigate('/user/login')
 
